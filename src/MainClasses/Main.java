@@ -245,12 +245,7 @@ public class Main {
     }
 
     private static void createProject(String lang, String projectName, String type) {
-        File currentFile = null;
-        try {
-            currentFile = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
-        } catch (URISyntaxException e) {
-            Messages.end(e.getMessage());
-        }
+        File currentFile = new File(System.getProperty("user.dir"));
         String Classes = "";
         String MainClass = "";
         String Output = "";

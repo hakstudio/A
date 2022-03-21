@@ -104,10 +104,12 @@ public class Main {
             String pathInProject = file.getPath().substring(classes.length() + 1).replaceAll("\\\\", "/");
             aCode = fileToString(file);
             Parse parse = new Parse(file, aCode);
-            System.out.println(parse.mainList);
-            System.out.println(parse.bracketList);
-            System.out.println(parse.curlyBracketList);
-            System.out.println(parse.quotesList);
+            //
+//            System.out.println(parse.mainList);
+//            System.out.println(parse.bracketList);
+//            System.out.println(parse.curlyBracketList);
+//            System.out.println(parse.quotesList);
+            //
             Compile compile = new Compile(file, aCode, parse.mainList, parse.bracketList, parse.curlyBracketList, parse.quotesList);
             files.add(new ClassObject(pathInProject.substring(0, pathInProject.length() - 2), compile.code));
         }

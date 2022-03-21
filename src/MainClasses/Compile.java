@@ -106,6 +106,7 @@ public class Compile {
                                         int next = j[0] + 1;
                                         while (A.spaces.contains(wordArray.get(next))) next++;
                                         ArrayList<String> subList = new ArrayList<>(wordArray.subList(next, lastIndex + 1));
+                                        subList.add(";");
                                         j[0] = lastIndex;
                                         String cbkey = "*{}:" + curlyBracketList.size() + "*";
                                         curlyBracketList.add(new ArrayList<>(Arrays.asList(subList)));
@@ -118,6 +119,7 @@ public class Compile {
                                             int next = j[0] + 1;
                                             while (A.spaces.contains(wordArray.get(next))) next++;
                                             ArrayList<String> subList = new ArrayList<>(wordArray.subList(next, lastIndex + 1));
+                                            subList.add(";");
                                             j[0] = lastIndex;
                                             String cbkey = "*{}:" + curlyBracketList.size() + "*";
                                             curlyBracketList.add(new ArrayList<>(Arrays.asList(subList)));
@@ -131,13 +133,13 @@ public class Compile {
                                 String[] keyList = key.split(":");
                                 code = code.concat("{");
                                 compile(curlyBracketList.get(Integer.parseInt(keyList[1])));
-                                code = code.substring(0, code.length() - 1);
+                                while (code.endsWith(";;")) code = code.substring(0, code.length() - 1);
                                 code = code.concat("}");
                             }
                             if (key.startsWith("\"\"")) {
                                 String[] keyList = key.split(":");
                                 String value = quotesList.get(Integer.parseInt(keyList[1]));
-                                String quotes = "";
+                                String quotes;
                                 String charQuotes = A.langs.contains(projectType) ? "\"" : otherLangsList.get(A.CHARACTER_QUOTES);
                                 String textQuotes = A.langs.contains(projectType) ? "\"" : otherLangsList.get(A.TEXT_QUOTES);
                                 String textFirst = aLangsList.get(A.TEXT).substring(0, 1).toLowerCase();
@@ -292,7 +294,12 @@ public class Compile {
             index0.removeAll(A.spaces);
             index1.removeAll(A.spaces);
             while (bracketArray.size() > 0) bracketArray.remove(0);
-            bracketArray.add(new ArrayList<>(Arrays.asList(index0.get(0), A.PLUS, index1.get(0), A.SEMICOLON)));
+            ArrayList<String> newArray=new ArrayList<>();
+            newArray.addAll(index0.subList(0,index0.size()-1));
+            newArray.add(A.PLUS);
+            newArray.addAll(index1.subList(0,index1.size()-1));
+            newArray.add(A.SEMICOLON);
+            bracketArray.add(newArray);
             return A.PRINT_WITHOUT_LINE;
         }
         Messages.printTypeNotFoundError(file);
@@ -483,7 +490,8 @@ public class Compile {
     }
 
     private String lastCheck(String word) {
-        String chr = word.substring(0, word.length() - 1);
+        String chr = "";
+        if (word.length() > 0) chr = word.substring(0, word.length() - 1);
         if (chr.length() > 0) {
             try {
                 Double.parseDouble(chr);

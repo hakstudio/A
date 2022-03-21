@@ -26,9 +26,9 @@ public class Messages {
     }
 
     public static void matchingError(File file, String k1, String k2) {
-        if (lang.equals(Turkce.lang)) end(file.toString() + ": Eşleştirme Hatası: " + k1 + "," + k2);
-        if (lang.equals(English.lang)) end(file.toString() + ": Matching Error: " + k1 + "," + k2);
-        if (lang.equals(Deutsch.lang)) end(file.toString() + ": Passenden Fehler: " + k1 + "," + k2);
+        if (lang.equals(Turkce.lang)) end(file.toString() + ": Eşleştirme Hatası: " + k1 + " " + k2);
+        if (lang.equals(English.lang)) end(file.toString() + ": Matching Error: " + k1 + " " + k2);
+        if (lang.equals(Deutsch.lang)) end(file.toString() + ": Passenden Fehler: " + k1 + " " + k2);
     }
 
     public static void fileNotFoundError(File file) {

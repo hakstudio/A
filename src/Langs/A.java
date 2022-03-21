@@ -102,6 +102,6 @@ public class A {
     public static final String SEMICOLON ="*;*";
     public static final String OPENSQUARE ="*[*";
     public static final String CLOSESQUARE ="*]*";
-    public static final String NEWLINE ="*\\n*";
+    public static final String NEWLINE ="*\n*";
     public static final String TAB="*\t*";
 }

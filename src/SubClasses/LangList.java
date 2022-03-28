@@ -81,4 +81,4 @@ public class LangList {
     public Boolean containsBDT(String exception) {
         return normalBDT.contains(exception);
     }
-}
+} 

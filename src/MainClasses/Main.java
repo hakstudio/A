@@ -94,7 +94,7 @@ public class Main {
         if (projectType == null) Messages.typeNotFoundError();
         if (classes == null || Files.notExists(Paths.get(classes))) Messages.classesNotFoundError();
         if (mainClass == null || Files.notExists(Paths.get(classes, mainClass))) Messages.mainClassNotFoundError();
-        if (output == null) Messages.mainClassNotFoundError();
+        if (output == null) Messages.outputNotFoundError();
     }
 
     private static void compile() {

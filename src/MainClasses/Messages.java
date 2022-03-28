@@ -62,6 +62,12 @@ public class Messages {
         if (lang.equals(Deutsch.lang)) end("HauptKlasse Nicht Gefunden Fehler");
     }
 
+    public static void outputNotFoundError() {
+        if (lang.equals(Turkce.lang)) end("Çıktı Bulunamadı Hatası");
+        if (lang.equals(English.lang)) end("Output Not Found Error");
+        if (lang.equals(Deutsch.lang)) end("Ausgabe Nicht Gefunden Fehler");
+    }
+
     public static void typeNotFoundError() {
         if (lang.equals(Turkce.lang)) end("Tür Bulunamadı Hatası");
         if (lang.equals(English.lang)) end("Type Not Found Error");
@@ -205,22 +211,22 @@ public class Messages {
         System.out.println();
         System.out.println("Türkçe:");
         System.out.println("------");
-        System.out.println("Çalıştır: <hak.a>");
         System.out.println("Proje Oluştur: <Dil> <ProjeAdı> <Tür>");
-        System.out.println("Dil Değiştirme: <hak.a> <YeniDil>");
+        System.out.println("Çalıştır: <hak.a>");
+        System.out.println("Dil Değiştir: <hak.a> <YeniDil>");
         System.out.println("------");
         System.out.println();
         System.out.println("English:");
         System.out.println("------");
-        System.out.println("Run: <hak.a>");
         System.out.println("Create Project: <Language> <ProjectName> <Type>");
+        System.out.println("Run: <hak.a>");
         System.out.println("Change Language: <hak.a> <NewLanguage>");
         System.out.println("------");
         System.out.println();
         System.out.println("Deutsch:");
         System.out.println("------");
-        System.out.println("Ausführen: <hak.a>");
         System.out.println("Projekt Erstellen: <Sprache> <ProjektName> <Typ>");
+        System.out.println("Ausführen: <hak.a>");
         System.out.println("Sprache Ändern: <hak.a> <NeueSprache>");
         System.out.println("------");
     }

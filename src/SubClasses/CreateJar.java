@@ -52,4 +52,4 @@ public class CreateJar {
             Messages.jarCreationError(e);
         }
     }
-}
+} 

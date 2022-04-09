@@ -148,6 +148,8 @@ public class Compile {
                                     wordArray.remove(j[0] + 1);
                                 } else if (value.toCharArray().length == 1) {
                                     quotes = charQuotes;
+                                } else if (value.toCharArray().length == 2 && value.charAt(0) == '\\') {
+                                    quotes = charQuotes;
                                 } else {
                                     quotes = textQuotes;
                                 }
@@ -294,10 +296,10 @@ public class Compile {
             index0.removeAll(A.spaces);
             index1.removeAll(A.spaces);
             while (bracketArray.size() > 0) bracketArray.remove(0);
-            ArrayList<String> newArray=new ArrayList<>();
-            newArray.addAll(index0.subList(0,index0.size()-1));
+            ArrayList<String> newArray = new ArrayList<>();
+            newArray.addAll(index0.subList(0, index0.size() - 1));
             newArray.add(A.PLUS);
-            newArray.addAll(index1.subList(0,index1.size()-1));
+            newArray.addAll(index1.subList(0, index1.size() - 1));
             newArray.add(A.SEMICOLON);
             bracketArray.add(newArray);
             return A.PRINT_WITHOUT_LINE;

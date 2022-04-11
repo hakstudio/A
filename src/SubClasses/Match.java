@@ -9,7 +9,9 @@ import java.util.HashMap;
 public class Match {
     boolean dontRemoveBwChars = false;
     private final File file;
-    public Match(File file){
+    private final HashMap<Integer, Integer> curlyBrackets = new HashMap<>();
+
+    public Match(File file) {
         this.file = file;
     }
 
@@ -38,9 +40,10 @@ public class Match {
                         }
                         indexMap.put(lastOpen + 1, lastClose);
                     }
+                    if (chr1.equals("{") && chr2.equals("}")) curlyBrackets.putAll(indexMap);
                     return indexMap;
                 }
-                Messages.matchingError(file,chr1, chr2);
+                Messages.matchingError(file, chr1, chr2);
                 return null;
             } else {
                 if (howMany("\"", code) % 2 == 0) {
@@ -65,7 +68,7 @@ public class Match {
                     }
                     return quotesMap;
                 }
-                Messages.matchingError(file,chr1, chr2);
+                Messages.matchingError(file, chr1, chr2);
             }
         }
         return new HashMap<>();
@@ -73,6 +76,7 @@ public class Match {
 
     private String removeBwChars(String chr1, String chr2, String code) {
         HashMap<Integer, Integer> matchChars = match(chr1, chr2, code);
+        removeExists(matchChars, curlyBrackets);
         Integer[] openChr = matchChars.keySet().toArray(new Integer[matchChars.size()]);
         Integer[] closeChr = matchChars.values().toArray(new Integer[matchChars.size()]);
         while (matchChars.size() > 0) {
@@ -129,5 +133,15 @@ public class Match {
             space += " ";
         }
         return space;
+    }
+
+    private void removeExists(HashMap<Integer, Integer> hm1, HashMap<Integer, Integer> hm2) {
+        Integer[] h1keys = hm1.keySet().toArray(new Integer[hm1.size()]);
+        Integer[] h2keys = hm2.keySet().toArray(new Integer[hm2.size()]);
+        ArrayList<Integer> keys = new ArrayList<>();
+        for (int i = 0; i < hm1.size(); i++)
+            for (int j = 0; j < hm2.size(); j++)
+                if (h1keys[i].equals(h2keys[j])) keys.add(h1keys[i]);
+        for (int key : keys) hm1.remove(key);
     }
 } 

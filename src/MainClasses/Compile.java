@@ -133,7 +133,8 @@ public class Compile {
                                 String[] keyList = key.split(":");
                                 code = code.concat("{");
                                 compile(curlyBracketList.get(Integer.parseInt(keyList[1])));
-                                code = code.substring(0, code.length() - 1);
+                                if (code.endsWith(";")) code = code.substring(0, code.length() - 1);
+                                while (code.endsWith(";;")) code = code.substring(0, code.length() - 1);
                                 code = code.concat("}");
                             }
                             if (key.startsWith("\"\"")) {

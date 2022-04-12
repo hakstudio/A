@@ -60,7 +60,7 @@ public class English {
 
         list.add("List", A.LIST);
         list.add("Dictionary", A.DICTIONARY);
-        list.addException("Random", A.RANDOM);
+        list.addException("random", A.RANDOM);
 
         list.addException("loop", A.LOOP);
         list.add("translate",A.TRANSLATE);

@@ -60,7 +60,7 @@ public class Turkce {
 
         list.add("Liste", A.LIST);
         list.add("Sözlük", A.DICTIONARY);
-        list.addException("Rastgele", A.RANDOM);
+        list.addException("rastgele", A.RANDOM);
 
         list.addException("döngü", A.LOOP);
         list.add("çevir",A.TRANSLATE);

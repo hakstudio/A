@@ -60,7 +60,7 @@ public class Deutsch {
 
         list.add("Liste", A.LIST);
         list.add("Wörterbuch", A.DICTIONARY);
-        list.addException("Zufalls", A.RANDOM);
+        list.addException("zufalls", A.RANDOM);
 
         list.addException("schleife", A.LOOP);
         list.add("übersetzen",A.TRANSLATE);

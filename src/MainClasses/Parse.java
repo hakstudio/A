@@ -11,6 +11,8 @@ public class Parse {
     private HashMap<Integer, Integer> bracket = new HashMap<>();
     private HashMap<Integer, Integer> curlyBracket = new HashMap<>();
     private HashMap<Integer, Integer> quotes = new HashMap<>();
+    private HashMap<Integer, Integer> sComments = new HashMap<>();
+    private HashMap<Integer, Integer> mComments = new HashMap<>();
     public ArrayList<ArrayList<String>> mainList = new ArrayList<>();
     public ArrayList<Object> bracketList = new ArrayList<>();
     public ArrayList<Object> curlyBracketList = new ArrayList<>();
@@ -30,6 +32,8 @@ public class Parse {
                 bracket = match.match("(", ")", classs);
                 curlyBracket = match.match("{", "}", classs);
                 quotes = match.match("\"", "\"", classs);
+                sComments = match.match("//", "\n", classs);
+                mComments = match.match("/*", "*/", classs);
                 mainList = parse(classs);
                 worked = true;
             } else if (cb > -1 && bracketList.get(cb).getClass().getName() == "java.lang.String") {
@@ -37,12 +41,16 @@ public class Parse {
                 bracket = match.match("(", ")", code);
                 curlyBracket = match.match("{", "}", code);
                 quotes = match.match("\"", "\"", code);
+                sComments = match.match("//", "\n", code);
+                mComments = match.match("/*", "*/", code);
                 bracketList.set(cb, parse(code));
             } else if (ccb > -1 && curlyBracketList.get(ccb).getClass().getName() == "java.lang.String") {
                 String code = (String) curlyBracketList.get(ccb);
                 bracket = match.match("(", ")", code);
                 curlyBracket = match.match("{", "}", code);
                 quotes = match.match("\"", "\"", code);
+                sComments = match.match("//", "\n", code);
+                mComments = match.match("/*", "*/", code);
                 curlyBracketList.set(ccb, parse(code));
             } else break;
         }
@@ -152,9 +160,13 @@ public class Parse {
                     item = "";
                     break;
                 case "/":
-                    if (item.length() > 0) codeArrayList.add(item);
-                    codeArrayList.add(A.DIVISION);
-                    item = "";
+                    if (code.charAt(i) == '/') i = sComments.get(i - 1);
+                    else if (code.charAt(i) == '*') i = mComments.get(i - 1) + 2;
+                    else {
+                        if (item.length() > 0) codeArrayList.add(item);
+                        codeArrayList.add(A.DIVISION);
+                        item = "";
+                    }
                     break;
                 case "&":
                     if (item.length() > 0) codeArrayList.add(item);

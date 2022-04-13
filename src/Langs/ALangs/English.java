@@ -67,13 +67,11 @@ public class English {
         list.add("const",A.CONST);
         list.add("break",A.BREAK);
 
-        list.add("Array",A.ARRAY);
         list.add("join",A.JOIN);
 
         list.add("try",A.TRY);
         list.add("catch",A.CATCH);
         list.add("Error",A.ERROR);
-        list.add("getMessage",A.GET_MESSAGE);
         list.add("null",A.NULL);
     }
 }

@@ -17,7 +17,7 @@ public class Match {
 
     public HashMap<Integer, Integer> match(String chr1, String chr2, String code) {
         if (chr1.length() > 0 && chr2.length() > 0 && code.length() > 0) {
-            if (!chr1.equals(chr2) && !chr1.equals("\"")) {
+            if (!chr1.equals(chr2) && !chr1.equals("\"") && !chr1.equals("//") && !chr1.equals("/*")) {
                 if (!dontRemoveBwChars) code = removeBwChars("\"", "\"", code);
                 code = removeBackslash(chr1, code);
                 code = removeBackslash(chr2, code);
@@ -44,8 +44,8 @@ public class Match {
                     return indexMap;
                 }
                 Messages.matchingError(file, chr1, chr2);
-                return null;
-            } else {
+            }
+            else if (chr1.equals("\"")) {
                 if (howMany("\"", code) % 2 == 0) {
                     dontRemoveBwChars = true;
                     code = removeBwChars("{", "}", code);
@@ -58,9 +58,7 @@ public class Match {
                                 if (code.charAt(i - 1) != '\\') {
                                     quotesList.add(i);
                                 }
-                            } else {
-                                quotesList.add(i);
-                            }
+                            } else quotesList.add(i);
                         }
                     }
                     for (int i = 0; i < quotesList.size(); i += 2) {
@@ -69,6 +67,24 @@ public class Match {
                     return quotesMap;
                 }
                 Messages.matchingError(file, chr1, chr2);
+            }
+            else if (chr1.equals("//") || chr1.equals("/*")) {
+                ArrayList<Integer> cOpenList = new ArrayList<>();
+                ArrayList<Integer> cCloseList = new ArrayList<>();
+                HashMap<Integer, Integer> commentsMap = new HashMap<>();
+                for (int i = 0; i < code.length(); i++) {
+                    if (code.startsWith(chr1, i)) cOpenList.add(i);
+                    if (code.startsWith(chr2, i)) cCloseList.add(i);
+                }
+                cCloseList.add(code.length());
+                int count = cOpenList.size();
+                if (count > cCloseList.size()) count = cCloseList.size();
+                for (int i = 0; i < count; i++) {
+                    int j = i;
+                    while (cOpenList.get(i) > cCloseList.get(j)) j++;
+                    commentsMap.put(cOpenList.get(i), cCloseList.get(j));
+                }
+                return commentsMap;
             }
         }
         return new HashMap<>();
@@ -144,4 +160,4 @@ public class Match {
                 if (h1keys[i].equals(h2keys[j])) keys.add(h1keys[i]);
         for (int key : keys) hm1.remove(key);
     }
-} 
+}

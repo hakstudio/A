@@ -67,7 +67,12 @@ public class Java {
         list.add("'",A.CHARACTER_QUOTES);
         list.add("\"",A.TEXT_QUOTES);
 
-        list.add("Arrays.asList",A.ARRAY,"java.util.Arrays");
         list.add("null",A.NULL);
+
+        list.add("try",A.TRY);
+        list.add("catch",A.CATCH);
+        list.add("Exception",A.ERROR);
+
+        list.add("join",A.JOIN);
     }
 }

@@ -67,13 +67,11 @@ public class Deutsch {
         list.add("konst",A.CONST);
         list.add("brechen",A.BREAK);
 
-        list.add("Array",A.ARRAY);
         list.add("beitreten",A.JOIN);
 
         list.add("try",A.TRY);
         list.add("fangen",A.CATCH);
         list.add("Fehler",A.ERROR);
-        list.add("bekommeNachricht",A.GET_MESSAGE);
         list.add("null",A.NULL);
     }
 }

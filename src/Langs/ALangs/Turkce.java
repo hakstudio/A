@@ -67,13 +67,11 @@ public class Turkce {
         list.add("sabit",A.CONST);
         list.add("kır",A.BREAK);
 
-        list.add("Dizi",A.ARRAY);
         list.add("birleştir",A.JOIN);
 
         list.add("dene",A.TRY);
         list.add("yakala",A.CATCH);
         list.add("Hata",A.ERROR);
-        list.add("mesajıGetir",A.GET_MESSAGE);
         list.add("boş",A.NULL);
     }
 }

@@ -66,5 +66,11 @@ public class CSharp {
         list.add("const",A.CONST);
         list.add("break",A.BREAK);
         list.add("null", A.NULL);
+
+        list.add("try",A.TRY);
+        list.add("catch",A.CATCH);
+        list.add("Exception",A.ERROR);
+
+        list.add("Join",A.JOIN);
     }
 }

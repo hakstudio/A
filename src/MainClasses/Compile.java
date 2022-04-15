@@ -429,10 +429,12 @@ public class Compile {
         code += ";";
         Parse parse = new Parse(file, code);
         Compile compile = new Compile(file, code, parse.mainList, parse.bracketList, parse.curlyBracketList, parse.quotesList);
-        if (code.startsWith(pcClass))
-            code = compile.code.substring(compile.pcClass.length() + 2, compile.code.length() - 3);
-        else code = compile.code.substring(0, compile.code.length() - 1);
-        if (compile.libsStr.length() > 0) code = code.substring(compile.libsStr.length() + 1);
+        code = compile.code;
+        int pc = -1;
+        if (!compile.pcClass.equals("")) pc = code.indexOf(compile.pcClass);
+        if (pc != -1) code = code.substring(pc);
+        if (code.startsWith(compile.pcClass)) code = code.substring(compile.pcClass.length() + 2, code.length() - 3);
+        else code = code.substring(0, code.length() - 1);
         libs.addAll(compile.libs);
         return code;
     }

@@ -73,5 +73,20 @@ public class Deutsch {
         list.add("fangen",A.CATCH);
         list.add("Fehler",A.ERROR);
         list.add("null",A.NULL);
+
+        list.add("erben",A.INHERIT);
+        list.add("dies",A.THIS);
+        list.add("hauptinit",A.MAININIT);
+        list.add("über",A.OVER);
+
+        list.add("schlüssel",A.KEYS);
+        list.add("werte",A.VALUES);
+
+        list.add("beginntMit",A.STARTS_WITH);
+        list.add("endetMit",A.ENDS_WITH);
+        list.add("enthält",A.CONTAINS);
+
+        list.add("rückkehrFehler",A.RETURN_ERROR);
+        list.add("endlich",A.FINALLY);
     }
 }

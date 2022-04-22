@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Match {
     boolean dontRemoveBwChars = false;
     private final File file;
-    private final HashMap<Integer, Integer> curlyBrackets = new HashMap<>();
+    //private HashMap<Integer, Integer> curlyBrackets = new HashMap<>();
 
     public Match(File file) {
         this.file = file;
@@ -18,7 +18,11 @@ public class Match {
     public HashMap<Integer, Integer> match(String chr1, String chr2, String code) {
         if (chr1.length() > 0 && chr2.length() > 0 && code.length() > 0) {
             if (!chr1.equals(chr2) && !chr1.equals("\"") && !chr1.equals("//") && !chr1.equals("/*")) {
-                if (!dontRemoveBwChars) code = removeBwChars("\"", "\"", code);
+                if (!dontRemoveBwChars) {
+                    code = removeBwChars("/*", "*/", code);
+                    code = removeBwChars("//", "\n", code);
+                    code = removeBwChars("\"", "\"", code);
+                }
                 code = removeBackslash(chr1, code);
                 code = removeBackslash(chr2, code);
                 int openNum = howMany(chr1, code);
@@ -40,16 +44,19 @@ public class Match {
                         }
                         indexMap.put(lastOpen + 1, lastClose);
                     }
-                    if (chr1.equals("{") && chr2.equals("}")) curlyBrackets.putAll(indexMap);
+                    //if (chr1.equals("{") && chr2.equals("}")) curlyBrackets.putAll(indexMap);
                     return indexMap;
                 }
+                System.out.println(chr1);
+                System.out.println(code);
                 Messages.matchingError(file, chr1, chr2);
-            }
-            else if (chr1.equals("\"")) {
+            } else if (chr1.equals("\"")) {
                 if (howMany("\"", code) % 2 == 0) {
                     dontRemoveBwChars = true;
                     code = removeBwChars("{", "}", code);
                     dontRemoveBwChars = false;
+                    code = removeBwChars("/*", "*/", code);
+                    code = removeBwChars("//", "\n", code);
                     ArrayList<Integer> quotesList = new ArrayList<>();
                     HashMap<Integer, Integer> quotesMap = new HashMap<>();
                     for (int i = 0; i < code.length(); i++) {
@@ -67,14 +74,13 @@ public class Match {
                     return quotesMap;
                 }
                 Messages.matchingError(file, chr1, chr2);
-            }
-            else if (chr1.equals("//") || chr1.equals("/*")) {
+            } else if (chr1.equals("//") || chr1.equals("/*")) {
                 ArrayList<Integer> cOpenList = new ArrayList<>();
                 ArrayList<Integer> cCloseList = new ArrayList<>();
                 HashMap<Integer, Integer> commentsMap = new HashMap<>();
                 for (int i = 0; i < code.length(); i++) {
                     if (code.startsWith(chr1, i)) cOpenList.add(i);
-                    if (code.startsWith(chr2, i)) cCloseList.add(i);
+                    if (code.startsWith(chr2, i)) cCloseList.add(i + chr2.length());
                 }
                 cCloseList.add(code.length());
                 int count = cOpenList.size();
@@ -92,9 +98,10 @@ public class Match {
 
     private String removeBwChars(String chr1, String chr2, String code) {
         HashMap<Integer, Integer> matchChars = match(chr1, chr2, code);
-        removeExists(matchChars, curlyBrackets);
+        //removeExists(matchChars, curlyBrackets);
         Integer[] openChr = matchChars.keySet().toArray(new Integer[matchChars.size()]);
         Integer[] closeChr = matchChars.values().toArray(new Integer[matchChars.size()]);
+
         while (matchChars.size() > 0) {
             int _openChr = openChr[0] - 1;
             int _closeChr = closeChr[0] + 1;
@@ -120,6 +127,10 @@ public class Match {
     private Integer howMany(String chr, String code) {
         int count = 0;
         if (chr.equals("\"")) {
+            if (!dontRemoveBwChars) {
+                code = removeBwChars("/*", "*/", code);
+                code = removeBwChars("//", "\n", code);
+            }
             for (int i = 0; i < code.length(); i++) {
                 if (code.charAt(i) == '"') {
                     if (i > 0) {
@@ -132,7 +143,11 @@ public class Match {
                 }
             }
         } else {
-            if (!dontRemoveBwChars) code = removeBwChars("\"", "\"", code);
+            if (!dontRemoveBwChars) {
+                code = removeBwChars("/*", "*/", code);
+                code = removeBwChars("//", "\n", code);
+                code = removeBwChars("\"", "\"", code);
+            }
             for (int i = 0; i < code.length(); i++) {
                 if (code.substring(i, i + 1).equals(chr)) {
                     count++;

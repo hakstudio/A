@@ -73,5 +73,20 @@ public class Turkce {
         list.add("yakala",A.CATCH);
         list.add("Hata",A.ERROR);
         list.add("boş",A.NULL);
+
+        list.add("miras",A.INHERIT);
+        list.add("bu",A.THIS);
+        list.add("anabaşlatıcı",A.MAININIT);
+        list.add("üzerine",A.OVER);
+
+        list.add("anahtarlar",A.KEYS);
+        list.add("değerler",A.VALUES);
+
+        list.add("başlıyorsa",A.STARTS_WITH);
+        list.add("bitiyorsa",A.ENDS_WITH);
+        list.add("içeriyorsa",A.CONTAINS);
+
+        list.add("hataDöndür",A.RETURN_ERROR);
+        list.add("sonunda",A.FINALLY);
     }
 }

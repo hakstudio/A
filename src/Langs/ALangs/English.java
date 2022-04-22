@@ -73,5 +73,20 @@ public class English {
         list.add("catch",A.CATCH);
         list.add("Error",A.ERROR);
         list.add("null",A.NULL);
+
+        list.add("inherit",A.INHERIT);
+        list.add("this",A.THIS);
+        list.add("maininit",A.MAININIT);
+        list.add("over",A.OVER);
+
+        list.add("keys",A.KEYS);
+        list.add("values",A.VALUES);
+
+        list.add("startsWith",A.STARTS_WITH);
+        list.add("endsWith",A.ENDS_WITH);
+        list.add("contains",A.CONTAINS);
+
+        list.add("returnError",A.RETURN_ERROR);
+        list.add("finally",A.FINALLY);
     }
 }

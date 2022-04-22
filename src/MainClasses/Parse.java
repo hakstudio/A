@@ -161,7 +161,7 @@ public class Parse {
                     break;
                 case "/":
                     if (code.charAt(i) == '/') i = sComments.get(i - 1);
-                    else if (code.charAt(i) == '*') i = mComments.get(i - 1) + 2;
+                    else if (code.charAt(i) == '*') i = mComments.get(i - 1);
                     else {
                         if (item.length() > 0) codeArrayList.add(item);
                         codeArrayList.add(A.DIVISION);
@@ -204,8 +204,10 @@ public class Parse {
                         item = "";
                     }
                     codeArrayList.add(A.COMMA);
-                    codesArrayList.add(codeArrayList);
-                    codeArrayList = new ArrayList<>();
+                    if (!(codeArrayList.contains(A.LESS) && !codeArrayList.contains(A.GREATER))) {
+                        codesArrayList.add(codeArrayList);
+                        codeArrayList = new ArrayList<>();
+                    }
                     break;
                 case ";":
                     if (item.length() > 0) {

@@ -83,6 +83,17 @@ public class A {
     public static final int RANDOM = 55;
     public static final int CHARACTER_QUOTES = 56;
     public static final int TEXT_QUOTES = 57;
+    public static final int INHERIT = 58;
+    public static final int THIS = 59;
+    public static final int MAININIT = 60;
+    public static final int OVER = 61;
+    public static final int KEYS = 62;
+    public static final int VALUES = 63;
+    public static final int STARTS_WITH = 64;
+    public static final int ENDS_WITH = 65;
+    public static final int CONTAINS = 66;
+    public static final int RETURN_ERROR = 67;
+    public static final int FINALLY = 68;
 
     public static final String SPACE ="* *";
     public static final String DOT ="*.*";

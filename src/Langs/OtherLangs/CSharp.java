@@ -62,15 +62,30 @@ public class CSharp {
         list.add("Dictionary", A.DICTIONARY, "System.Collections.Generic");
         list.add("new Random().Next", A.RANDOM, "System");
 
-        list.add("Parse",A.TRANSLATE);
-        list.add("const",A.CONST);
-        list.add("break",A.BREAK);
+        list.add("Parse", A.TRANSLATE);
+        list.add("const", A.CONST);
+        list.add("break", A.BREAK);
         list.add("null", A.NULL);
 
-        list.add("try",A.TRY);
-        list.add("catch",A.CATCH);
-        list.add("Exception",A.ERROR);
+        list.add("try", A.TRY);
+        list.add("catch", A.CATCH);
+        list.add("Exception", A.ERROR);
 
-        list.add("Join",A.JOIN);
+        list.add("Join", A.JOIN);
+
+        list.add(":", A.INHERIT);
+        list.add("this", A.THIS);
+        list.add("base", A.MAININIT);
+        list.add("public override", A.OVER);
+
+        list.add("Keys", A.KEYS);
+        list.add("Values", A.VALUES);
+
+        list.add("StartsWith", A.STARTS_WITH);
+        list.add("EndsWith", A.ENDS_WITH);
+        list.add("Contains", A.CONTAINS);
+
+        list.add("throw new Exception", A.RETURN_ERROR);
+        list.add("finally",A.FINALLY);
     }
 }
